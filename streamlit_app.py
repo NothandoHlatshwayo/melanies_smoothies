@@ -1,6 +1,5 @@
 # Import python packages
 import streamlit as st
-from snowflake.snowpark import Session
 from snowflake.snowpark.functions import col
 
 
@@ -16,8 +15,8 @@ st.write(
 
 name_on_order = st.text_input("Name on Smoothie")
 st.write("The name on your order will be: ", name_on_order)
+session=cnx.session()
 cnx=st.connection("snowflake")
-
 session.sql("USE WAREHOUSE COMPUTE_WH").collect()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME')).pandas()
 #st.dataframe(data=my_dataframe, use_container_width=True)
