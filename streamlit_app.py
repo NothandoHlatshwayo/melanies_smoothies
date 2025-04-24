@@ -41,11 +41,21 @@ if ingredients_list:
 
   #st.write(my_insert_stmt)
   #st.stop()
+  session = Session.builder.configs(connection_parameters).create()
+
+
   time_to_insert=st.button('Submit Order')
   if time_to_insert:
-   session.sql(my_insert_stmt).collect()  
+    session = Session.builder.configs(connection_parameters).create()
 
-   st.success('Your Smoothie is ordered, '+ name_on_order+'!' , icon="✅")
+
+    session.sql("USE WAREHOUSE COMPUTE_WH").collect()
+
+
+
+    session.sql(my_insert_stmt).collect()  
+
+    st.success('Your Smoothie is ordered, '+ name_on_order+'!' , icon="✅")
 
 
 
