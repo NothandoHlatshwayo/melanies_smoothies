@@ -17,7 +17,7 @@ st.write(
 name_on_order = st.text_input("Name on Smoothie")
 st.write("The name on your order will be: ", name_on_order)
 cnx=st.connection("snowflake")
-session =cnx.session
+session = Session.builder.configs(connection_parameters).create()
 
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME')).pandas()
 #st.dataframe(data=my_dataframe, use_container_width=True)
