@@ -19,6 +19,7 @@ try:
     # Establish connection to Snowflake (assuming st.connection is correctly defined)
     cnx = st.connection("snowflake")
     session = cnx.session()
+    session.sql("USE WAREHOUSE COMPUTE_WH").collect()
 
     # Retrieve fruit options from Snowflake
     my_dataframe = session.table("smoothies.public.fruit_options").select(col("FRUIT_NAME"))
@@ -60,5 +61,4 @@ try:
 except Exception as ex:
     st.error(f"An error occurred: {str(ex)}")
 
-# Display a link
-st.write("https://github.com/appuv")
+
