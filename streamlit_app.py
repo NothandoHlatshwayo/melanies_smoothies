@@ -46,7 +46,7 @@ if ingredients_list:
 
   time_to_insert=st.button('Submit Order')
   if time_to_insert:
-    session = Session.builder.configs(connection_parameters).create()
+    
 
 
     session.sql("USE WAREHOUSE COMPUTE_WH").collect()
