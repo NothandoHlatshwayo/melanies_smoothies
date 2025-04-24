@@ -41,7 +41,7 @@ if ingredients_list:
 
   #st.write(my_insert_stmt)
   #st.stop()
-  session = Session.builder.configs(connection_parameters).create()
+  
 
 
   time_to_insert=st.button('Submit Order')
