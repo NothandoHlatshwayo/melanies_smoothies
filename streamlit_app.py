@@ -18,7 +18,7 @@ name_on_order = st.text_input("Name on Smoothie")
 st.write("The name on your order will be: ", name_on_order)
 cnx=st.connection("snowflake")
 session = Session.builder.configs(connection_parameters).create()
-
+session.sql("USE WAREHOUSE COMPUTE_WH").collect()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME')).pandas()
 #st.dataframe(data=my_dataframe, use_container_width=True)
 
@@ -40,6 +40,8 @@ if ingredients_list:
   #st.stop()
   time_to_insert=st.button('Submit Order')
   if time_to_insert:
+    session = Session.builder.configs(connection_parameters).create()
+
     session.sql("USE WAREHOUSE COMPUTE_WH").collect()
     session.sql(my_insert_stmt).collect()
     st.success('Your Smoothie is ordered, '+ name_on_order+'!' , icon="✅")
